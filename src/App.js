@@ -1,23 +1,22 @@
-import logo from './logo.svg';
+import { useEffect } from 'react';
 import './App.css';
 
+import { useDispatch, useSelector } from 'react-redux';
+import { getUsersThunk } from './store/reducers/usersReducer';
+
+
 function App() {
+  const {isFetching} = useSelector((state) => state.usersPage)
+  const dispatch = useDispatch()
+  useEffect(() => {
+   dispatch(getUsersThunk())
+    
+  }, [])
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {
+        isFetching ? <h1>Loading...</h1> : ''
+      }
     </div>
   );
 }
