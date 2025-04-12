@@ -6,8 +6,8 @@ const instance = axios.create({
 })
 
 export const SocialAPI = {
-    getUsers(){
-        return instance.get('/users')
+    getUsers(page = 1){
+        return instance.get(`/users?page=${page}&count=100`)
     }
 }
 

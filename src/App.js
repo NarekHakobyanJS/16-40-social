@@ -1,22 +1,18 @@
-import { useEffect } from 'react';
+
 import './App.css';
+import { Routes, Route } from 'react-router-dom';
 
-import { useDispatch, useSelector } from 'react-redux';
-import { getUsersThunk } from './store/reducers/usersReducer';
-
+import HomePage from './pages/HomePage/HomePage'
+import UsersPage from './pages/UsersPage/UsersPage';
 
 function App() {
-  const {isFetching} = useSelector((state) => state.usersPage)
-  const dispatch = useDispatch()
-  useEffect(() => {
-   dispatch(getUsersThunk())
-    
-  }, [])
+  
   return (
     <div className="App">
-      {
-        isFetching ? <h1>Loading...</h1> : ''
-      }
+      <Routes>
+        <Route path='/' element={<HomePage />}/>
+        <Route path='/users' element={<UsersPage /> }/>
+      </Routes>
     </div>
   );
 }
